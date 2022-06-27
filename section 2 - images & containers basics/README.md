@@ -38,7 +38,7 @@ f4254e725371   8cb3378a947a   "docker-entrypoint.s…"   2 days ago       Exited
 - suivis : ex:  ```docker logs -f <NAME/ID>```
   - ```logs``` affichera les logs (en mode detaché)
   - ```logs -f``` suivira les logs en temps réel, ```-f```: follow
-- voir : [```--attach```](./interactions)
+- voir : 👉[```--attach```](./interactions)
 
 ```docker image inspect <NAME/ID>``` : renvoies les details de l'image, ses couches "*layers*", ses variables d'environement, ports ...
 
