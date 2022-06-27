@@ -1,6 +1,6 @@
 # docker
 
-```docker run node``` : lance l'image de node, elle sera telechargée si elle n'est pas en localdocker
+```docker run node``` : lance l'image de node, elle sera telechargée si elle n'est pas en local
 
 ```docker ps -a``` >>>
 (all containers created)
@@ -13,6 +13,28 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS  
 68fb8759064e   f8126319560a   "docker-entrypoint.s…"   47 minutes ago   Exited (137) 44 minutes ago             focused_shamir
 ```
 
-```docker run -it node``` >> run node iteractive, on pourra interagir avec le container
+```docker run -it node``` >> run node iteractive, on pourra interagir avec le container (arrive rarement)
 
-``` ```
+##### les image peuvent être
+
+- nomées : ```docker tag``` ou ```-t```
+- listées : ```docker images```
+- analysées : ```docker image inspect```
+- supprimées : ```docker rmi``` ou ```prune```
+
+##### les containers peuvent être
+
+- només : ```--name```
+- configurés en details : voir ```--help```
+- listés : ```docker ps``` + ```-a``` pour ```--all``` affichera les containers arretés
+- supprimés : ```docker rm```
+
+###### running / stoped containers
+
+- re/lancés : ```docker start <NAME/ID>``` en mode "detaché" : (backgroung non interactif)
+- lancés : ```docker run -p 8000:80 <NAME/ID>``` en mode "attaché" : (foregroung interactif)
+  - ou ```-d <NAME/ID>``` pour le mode "detaché"
+- suivis : ex:  ```docker logs -f <NAME/ID>```
+  - ```logs``` affichera les logs (en mode detaché)
+  - ```logs -f``` suivira les logs en temps réel, ```-f```: follow
+- voir : [```---attach```](./test%20with%20python/README.md)
