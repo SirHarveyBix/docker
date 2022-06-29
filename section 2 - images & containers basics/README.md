@@ -7,7 +7,7 @@
 
 ```shell
 CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS                        PORTS     NAMES
-2aa2e387c198   5e2b6054a9de   "python rng.py"          24 minutes ago   Up 11 seconds                           wonderful_villani
+2aa2e387c198   5e2b6054a9de   "python rng.py"          24 minutes ago   Up 11 seconds                           goalsapp
 ab40b3d26082   5e2b6054a9de   "python rng.py"          27 minutes ago   Exited (1) 27 minutes ago               reverent_perlman
 27475624419b   8cb3378a947a   "docker-entrypoint.s…"   2 days ago       Exited (137) 14 minutes ago             hungry_curran
 f4254e725371   8cb3378a947a   "docker-entrypoint.s…"   2 days ago       Exited (137) 2 days ago                 eloquent_lamport
@@ -30,7 +30,7 @@ f4254e725371   8cb3378a947a   "docker-entrypoint.s…"   2 days ago       Exited
 - supprimés : ```docker rm``` ou ```docker container prune```
   - automatiquement : ```docker run --rm <NAME/ID>```
 
-###### running / stoped containers
+###### running / stopped containers
 
 - re/lancés : ```docker start <NAME/ID>``` en mode "detaché" : (backgroung non interactif)
 - lancés : ```docker run -p 8000:80 <NAME/ID>``` en mode "attaché" : (foregroung interactif)
