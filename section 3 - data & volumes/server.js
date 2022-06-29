@@ -36,7 +36,8 @@ app.post('/create', async (req, res) => {
     if (exists) {
       res.redirect('/exists');
     } else {
-      await fs.rename(tempFilePath, finalFilePath);
+      await fs.copyFile(tempFilePath, finalFilePath); // pour gerer le conflit avec docker (rename => copyFile)
+      await fs.unlink(tempFilePath) // pour gerer le conflit avec docker
       res.redirect('/');
     }
   });

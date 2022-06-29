@@ -10,4 +10,7 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["node", "server.js"]
+# VOLUME [ "/app/feedback" ]
+# ecoute le dossier /app/feedback dans le container
+
+CMD [ "node", "server.js" ]
