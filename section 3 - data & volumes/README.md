@@ -13,14 +13,16 @@ L'image est par defaut *Read-only*, contrairement au container : *Read-write*.
 
 ### Creation du conteneur
 
-```docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback feedback-node:volumes``` :
+```docker
+docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "C:/Users/[USERNAME]/code/docker/section 3 - data & volumes:/app" feedback-node:volumes
+```
 
-- ```docker run feedback-node:volumes``` : lance l'image : feedback-node, qui poert le tag : "volumes"
+- ```docker run feedback-node:volumes``` : lance l'image : feedback-node, qui porte le tag : "volumes"
 - ```-p 3000:80``` :"publie" sur le port [3000](http://localhost:3000/), (l'appli est sur le port [80](http://localhost:80/))
 - ```-d``` en mode "detached" => terminal accessible
 - ```--name feedback-app``` : nome le conteneur : "feedback-app"
 - ```--rm``` : supprime le conteneur une fois stoppé .
-- ```docker images``` :
+- cmd : ```docker images``` :
 
   - ```shell
     REPOSITORY              TAG       IMAGE ID       CREATED         SIZE
@@ -36,9 +38,10 @@ L'image est par defaut *Read-only*, contrairement au container : *Read-write*.
 - ```-v``` : pour volume, créer un volume dans le container, sans argument il sera 'anonyme'.
   - ```feedback:/app/feedback``` : ```feedback``` defini le nom, ```/app/feedback``` defini le chemin d'accès dans le container
 
-suppressions des volumes :
+suppression des volumes :
 
 - ```docker volume prune``` : supprimera tout les volumes 'anonyme'
 - ```docker volume rm [VOL_NAME]``` : supprimera le volume mentionné.
 
+(gérés par docker)
 Les volumes sont des dossier / ficher locaux, en dehors du container, ils sont disponible pour le container, et mappés dans le container, si on ajouter un fichier en local, il se retrouvera aussi dans le container, a l'inverse, un ficher ajouter dans le container se retrouvera localement.
