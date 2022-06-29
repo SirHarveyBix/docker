@@ -25,8 +25,8 @@ app.get('/exists', (req, res) => {
 app.post('/create', async (req, res) => {
   const title = req.body.title;
   const content = req.body.text;
-
-  const adjTitle = title.toLowerCase();
+  
+const adjTitle = title.toLowerCase();
 
   const tempFilePath = path.join(__dirname, 'temp', adjTitle + '.txt');
   const finalFilePath = path.join(__dirname, 'feedback', adjTitle + '.txt');

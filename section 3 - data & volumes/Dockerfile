@@ -6,11 +6,13 @@ COPY package.json .
 
 RUN npm install
 
+# VOLUME [ "/app/node_modules" ] => a reverifier
+#  creer un volume anonyme pour empecher l'ecrasement generé par la commande :
+#  -v "C:/Users/[USERNAME]/code/docker/section 3 - data & volumes:/app"
+#  il est aussi possible d'ajouter a la suite de la commande precedente : -v /app/node_modules
+
 COPY . .
 
 EXPOSE 80
 
-# VOLUME [ "/app/feedback" ]
-# ecoute le dossier /app/feedback dans le container
-
-CMD [ "node", "server.js" ]
+CMD [ "npm", "start" ]
