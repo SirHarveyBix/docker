@@ -69,4 +69,4 @@ dans [Dockerfile](./Dockerfile) ces elements ont été modifiés :
 ```ENV PORT 80``` : connecte ```process.env.PORT``` au port *80*
 ```EXPOSE $PORT``` : *```$```* = varibale
 
-Il est aussi possible d'ajouter cette variable dans la commande : ```-p 3000:8000 --env PORT=8000``` ou ```-e```, ```--env-file .env``` dans le cas ou les varaibles sont stockés dans un fichier *.env*
+Il est aussi possible d'ajouter cette variable dans la commande : ```-p 3000:8000 --env PORT=8000``` ou ```-e```, ```--env-file ./.env``` dans le cas ou les varaibles sont stockés dans un fichier *.env*
