@@ -68,10 +68,13 @@ pour que 2 containers se connecte entre eux il faut un reseau commun, et ce avan
 ```docker network create chosen-network-name```
 
 ensuite ces containers doivent se connecter au *network* :
+
 container 1 - image mongo de docker hub :
+
 ```docker run -d --name mongodb --network chosen-network-name mongo``` 
 
 container 2 - notre projet :
+
 ```docker run -d --name favorite --network chosen-network-name --rm -p 3000:3000 movies```
 
 le code doit evidement etre coherent avec ces container :
