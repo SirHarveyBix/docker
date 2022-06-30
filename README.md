@@ -1,7 +1,9 @@
 # docker
 
-[Containers & images : section 2 - images & containers basics](./section 2 - images & containers basics)
+suivi du cours : [Docker & Kubernetes: The Practical Guide [2022 Edition]](https://www.udemy.com/course/docker-kubernetes-the-practical-guide/)
 
-[Volumes : section 3 - data & volumes](./section 3 - data & volumes)
+## Sections de cours 
 
-suivi du cours : https://www.udemy.com/course/docker-kubernetes-the-practical-guide/
+Containers & images : [section 2 - images & containers basics](./section%202%20-%20images%20&%20containers%20basics)
+
+Volumes : [section 3 - data & volumes](./section%203%20-%20data%20&%20volumes)
