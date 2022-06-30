@@ -68,7 +68,8 @@ app.get('/people', async (req, res) => {
 });
 
 mongoose.connect(
-  'mongodb://localhost:27017/swfavorites',
+  'mongodb://mongodb:27017/swfavorites',
+  //            ^ le nom du container qui partage le meme network 
   { useNewUrlParser: true },
   (err) => {
     if (err) {
