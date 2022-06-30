@@ -65,6 +65,7 @@ puis : ```docker run --name favorite --network favorite-net -d --rm -p 3000:3000
 ## synthèse
 
 pour que 2 containers se connecte entre eux il faut un reseau commun, et ce avant meme le build des images :
+
 ```docker network create chosen-network-name```
 
 ensuite ces containers doivent se connecter au *network* :
