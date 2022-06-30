@@ -63,10 +63,20 @@ docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "
 
 ## Arguments & Variable d'Environnement
 
-dans server.js, le port ancienement *80*, a été remplacé par ```process.env.PORT```
-dans [Dockerfile](./Dockerfile) ces elements ont été modifiés :
+voir : [Dockerfile](./Dockerfile)
+
+- ### ```ENV```
+
+dans [server.js](./server.js), le port ancienement *80*, a été remplacé par ```process.env.PORT```
+dans Dockerfile ces elements ont été modifiés :
 
 ```ENV PORT 80``` : connecte ```process.env.PORT``` au port *80*
 ```EXPOSE $PORT``` : *```$```* = varibale
 
 Il est aussi possible d'ajouter cette variable dans la commande : ```-p 3000:8000 --env PORT=8000``` ou ```-e```, ```--env-file ./.env``` dans le cas ou les varaibles sont stockés dans un fichier *.env*
+
+- ### ```ARG```
+
+la valeur ```ARG``` ici ```DEFAULT_PORT=80``` permet de changer la valeur de manière dynamique, au build :
+
+```docker build -t feedback-node:dev --build-arg DEFAULT_PORT=8000 .```
