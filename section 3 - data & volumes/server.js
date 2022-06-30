@@ -43,4 +43,4 @@ const adjTitle = title.toLowerCase();
   });
 });
 
-app.listen(80);
+app.listen(process.env.PORT);

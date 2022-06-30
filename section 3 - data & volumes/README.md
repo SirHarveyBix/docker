@@ -49,10 +49,10 @@ Afficher les volumes : ```docker volume ls```
 
 suppression des volumes :
 
-- ```docker volume prune``` : supprimera tout les volumes 'anonyme'
+- ```docker volume prune``` : supprimera tout les volumes non utilisés.
 - ```docker volume rm [VOL_NAME]``` : supprimera le volume mentionné.
 
-(gérés par docker)
+Les *volumes* sont gérés par docker, a l'inverse des *Binds Mounts*.
 Les volumes sont des dossier / ficher locaux, en dehors du container, ils sont disponible pour le container, et mappés dans le container, si on ajouter un fichier en local, il se retrouvera aussi dans le container, a l'inverse, un ficher ajouter dans le container se retrouvera localement.
 
 commande complete :
@@ -60,3 +60,13 @@ commande complete :
 ```docker
 docker run -d -p 3000:80 --rm --name feedback-app -v feedback:/app/feedback -v "%cd%":/app:ro -v /app/temp -v /app/node_modules feedback-node:volumes
 ```
+
+## Arguments & Variable d'Environnement
+
+dans server.js, le port ancienement *80*, a été remplacé par ```process.env.PORT```
+dans [Dockerfile](./Dockerfile) ces elements ont été modifiés :
+
+```ENV PORT 80``` : connecte ```process.env.PORT``` au port *80*
+```EXPOSE $PORT``` : *```$```* = varibale
+
+Il est aussi possible d'ajouter cette variable dans la commande : ```-p 3000:8000 --env PORT=8000``` ou ```-e```

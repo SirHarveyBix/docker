@@ -1,0 +1,7 @@
+# empeche la commande "COPY . ." do copier les elements present dans ce fichier
+
+node_modules
+Dockerfile
+.git
+
+.DS_Store
