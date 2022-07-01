@@ -1,6 +1,6 @@
 # Docker
 
-## Local 
+## Local
 
 Project : React app Node + Mongodb backend.
 [frontend](./frontend/)
@@ -48,7 +48,7 @@ maintenant, le backend est correctement connecté a mongobd, et grace à ```-p 8
 
 ```docker run --name goals-frontend --rm -d -p 3000:3000 goals-react```
 
-en cas d'erreur il nous faut ajouter : ```-it``` 
+en cas d'erreur il nous faut ajouter : ```-it```
 
 ```docker ps``` :
 
@@ -111,3 +111,25 @@ ac12875a292f   mongo         "docker-entrypoint.s…"   27 minutes ago       Up 
 4. retour sur le backend le port doit aussi etre afficher ```--publish```, pour que le front puisse y acceder :
    ```docker run --name goals-backend --rm -d --network goals -p 80:80 goals-node```
    le front n'a plus besoin de *network* : ```docker run --name goals-frontend --rm -d -p 3000:3000 goals-react```
+
+#### Persistance des donnée (mongodb)
+
+1. ##### ```--volume```
+
+- pour que les données persistent, la [doc](https://hub.docker.com/_/mongo) nous indique le chemin du volume :
+  *```docker --name some-mongo -v myData/dir:/data/db -d mongo```* :
+  **```docker run --name mongodb -v data:/data/db --rm -d --network goals mongo```**
+
+2. ##### ```--env``` ou ```-e```
+
+- securité : on peu ajouer des *.env* pour mongodb , ici :
+  - ```MONGO_INITDB_ROOT_USERNAME=```
+  - ```MONGO_INITDB_ROOT_PASSWORD=```
+- ```docker run --name mongodb -v data:/data/db --rm -d --network goals -e MONGO_INITDB_ROOT_USERNAME=guillaume -e MONGO_INITDB_ROOT_PASSWORD=secret mongo```
+- le code dans [app.js](./backend/app.js) a besoin d'etre edité :
+
+  ```js
+  mongoose.connect(
+    'mongodb://guillaume:secret@mongodb:27017/course-goals',
+  );
+  ```
