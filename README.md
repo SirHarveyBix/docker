@@ -8,4 +8,4 @@ Containers & images : [section 2 - images & containers basics](./section%202%20-
 
 Volumes : [section 3 - data, volumes & .env](./section%203%20-%20data,%20volumes%20&%20.env)
 
-- : [](./section%204%20-%20)
+connecter les containers : [Section 4 - Networking (Cross-)Container Communication](./section%204%20-%20Networking%20(Cross-)Container%20Communication)

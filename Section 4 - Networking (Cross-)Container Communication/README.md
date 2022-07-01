@@ -4,8 +4,8 @@
 
 ## cross-container
 
-application a besoin de communiquer avec un second container :
-[app.js](./app.js)
+Cette application a besoin de communiquer avec un second container : [app.js](./app.js)
+il n'y a pas de front, la communication se fait uniquement avec postman.
 
 ```js
 mongoose.connect(
