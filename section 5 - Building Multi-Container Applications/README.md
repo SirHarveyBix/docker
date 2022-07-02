@@ -120,9 +120,6 @@ ac12875a292f   mongo         "docker-entrypoint.s…"   27 minutes ago       Up 
   *```docker --name some-mongo -v myData/dir:/data/db -d mongo```* :
   **```docker run --name mongodb -v data:/data/db --rm -d --network goals mongo```**
 
----
-a editer
-
 - pour le backend ajouter ce volumes :
 
   ```shell
@@ -134,7 +131,18 @@ a editer
   goals-node
   ```
 
----
+- pour le frontend ajouter ce volumes :
+  
+  ```shell
+  docker run --name goals-frontend --network goals 
+  -v '/Users/guillaumemini/Documents/VScode/docker/section 5 - Building Multi-Container Applications/frontend/src':/app/src
+  --rm -d -p 3000:3000
+  goals-react
+  ```
+
+il vous faut ajouter le chemin d'accès complet pour creer ces bind mounts :
+
+- ```-v '/Users/guillaumemini/Documents/VScode/docker/section 5 - Building Multi-Container Applications/backend':/app```
 
 1. ##### ```--env``` ou ```-e```
 
@@ -156,3 +164,39 @@ a editer
   ENV MONGODB_USERNAME=guillaume
   ENV MONGODB_PASSWORD=secret 
   ```
+
+## Sythese
+
+avant de commencer vous devez creer votre network :
+
+- ```docker network create goals```
+
+ensuite, *pull* l'image de mongodb :
+```docker run --name mongodb -v data:/data/db --rm -d --network goals -e MONGO_INITDB_ROOT_USERNAME=guillaume -e MONGO_INITDB_ROOT_PASSWORD=secret mongo```
+
+- ```-v data:/data/db``` : permet creer le volume qui fera perister les données 
+- ```-e``` : vous permet d'ajouter les vaible d'environement
+
+creer l'image du back :
+
+- ```docker build -t goals-node .```
+  
+  ```shell
+  docker run --name goals-backend 
+  -v '/Users/guillaumemini/Documents/VScode/docker/section 5 - Building Multi-Container Applications/backend':/app
+  -v logs:/app/logs
+  -v /app/node_modules
+  --rm -d --network goals -p 80:80
+  goals-node
+  ```
+
+- celle du front ;
+  
+    ```shell
+  docker run --name goals-frontend
+  -v '/Users/guillaumemini/Documents/VScode/docker/section 5 - Building Multi-Container Applications/frontend/src':/app/src
+  --rm -d --network goals -p 3000:3000
+  goals-react
+  ```
+
+rendez-vous sur [localhost:3000](http://localhost:3000/)
