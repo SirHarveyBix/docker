@@ -120,7 +120,23 @@ ac12875a292f   mongo         "docker-entrypoint.s…"   27 minutes ago       Up 
   *```docker --name some-mongo -v myData/dir:/data/db -d mongo```* :
   **```docker run --name mongodb -v data:/data/db --rm -d --network goals mongo```**
 
-2. ##### ```--env``` ou ```-e```
+---
+a editer
+
+- pour le backend ajouter ce volumes :
+
+  ```shell
+  docker run --name goals-backend 
+  -v '/Users/guillaumemini/Documents/VScode/docker/section 5 - Building Multi-Container Applications/backend':/app
+  -v logs:/app/logs
+  -v /app/node_modules
+  --rm -d --network goals -p 80:80
+  goals-node
+  ```
+
+---
+
+1. ##### ```--env``` ou ```-e```
 
 - securité : on peu ajouer des *.env* pour mongodb , ici :
   - ```MONGO_INITDB_ROOT_USERNAME=```
@@ -130,6 +146,13 @@ ac12875a292f   mongo         "docker-entrypoint.s…"   27 minutes ago       Up 
 
   ```js
   mongoose.connect(
-    'mongodb://guillaume:secret@mongodb:27017/course-goals',
+  `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/course-goals?authSource=admin`,
   );
+  ```
+
+  les variable doivent etre ajoutées dans le [Dockerfile](backend/Dockerfile)
+
+  ```shell
+  ENV MONGODB_USERNAME=guillaume
+  ENV MONGODB_PASSWORD=secret 
   ```
