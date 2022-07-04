@@ -2,6 +2,11 @@
 
 permet de remplacer ```docker build``` ```docker run```, dans un seul fichier de configuration, et gerer les multi-containers.
 
+pour utiliser docker-compose :
+
+- **```docker-compose up```** : pour lancer, *```-d``` pour le mode detaché*
+- **```docker-compose down```** : pour supprimer les containers, *```-v``` pour supprimer les volumes*
+
 plutot que d'avoir une ligne de commande de ce type :
 
 - [docker-commands](./docker-commands.txt) =>
@@ -29,10 +34,10 @@ services:
     image: 'mongo' 
     volumes:
       - data:/data/db
+    env_file:
+      - ./pathto/.env
+    # ou si il n'y a pas de .env : 
     environment:
-      env_file:
-        - ./pathto/.env
-      # ou si il n'y a pas de .env :
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: secret
 ```
@@ -41,7 +46,7 @@ pour comparaison, voir l'equivalement en invite de commande ci-dessus.
 
 par defaut ```--rm``` est activé, en revance pas besoin de specifier ```-d```
 
-- **```--network```** : les container creer par docker-compose n'ont pas besoin de la specification *```--network```*, puisqu'il seront executé dans le meme reseau, si toutefois on veut leurs donner un nom : 
+- **```--network```** : les container creer par docker-compose n'ont pas besoin de la specification *```--network```*, puisqu'il seront executé dans le meme reseau, si toutefois on veut leurs donner un nom :
 
   ```yaml
   services:
@@ -50,4 +55,3 @@ par defaut ```--rm``` est activé, en revance pas besoin de specifier ```-d```
       networks:
         - goals-net
   ```
-

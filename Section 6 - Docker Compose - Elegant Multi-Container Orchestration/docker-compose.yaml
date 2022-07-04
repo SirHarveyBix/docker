@@ -9,9 +9,22 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: secret
 
-  #backend:
+  backend:
+    build: ./backend
+    env_file:
+    - ./env/backend.env
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - '80:80'
+    depends_on:
+      - mongodb
 
   #frontend:
 
 volumes:
-  data: # les volumes només doivent etre specifiés ici
+# les volumes només doivent etre specifiés ici
+  data:
+  logs:
