@@ -3,14 +3,16 @@ version: "3.8"
 services:
   mongodb:
     image: 'mongo'
-    volumes:
-      - data:/data/db
+    container_name: mongodb
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: secret
+    volumes:
+      - data:/data/db
 
   backend:
     build: ./backend
+    container_name: backend
     env_file:
     - ./env/backend.env
     volumes:
@@ -22,9 +24,20 @@ services:
     depends_on:
       - mongodb
 
-  #frontend:
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    volumes:
+      - ./frontend/src:/app/src
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    # needs an open input connection (react) / interactive mode - optionel ?
+    stdin_open: true
+    tty: true
 
-volumes:
 # les volumes només doivent etre specifiés ici
+volumes:
   data:
   logs:

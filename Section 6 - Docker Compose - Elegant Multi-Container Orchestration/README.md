@@ -6,6 +6,7 @@ pour utiliser docker-compose :
 
 - **```docker-compose up```** : pour lancer, *```-d``` pour le mode detaché*
 - **```docker-compose down```** : pour supprimer les containers, *```-v``` pour supprimer les volumes*
+- **```docker-compose build```** : build les images sans *```run```*
 
 plutot que d'avoir une ligne de commande de ce type :
 
@@ -28,10 +29,10 @@ les ficher docker-compose s'ecrivent en yaml, c'est donc l'indentation qui compt
 
 ```yaml
 version: "3.8" 
-
 services:
-  mongodb: # --name
+  mongodb: # --name + nom du dossier + nombre
     image: 'mongo' 
+    container_name: mongodb # --name mongodb
     volumes:
       - data:/data/db
     env_file:
@@ -54,4 +55,13 @@ par defaut ```--rm``` est activé, en revance pas besoin de specifier ```-d```
       image: 'mongo'
       networks:
         - goals-net
+  ```
+
+- **volumes** :
+tous les volumes present dans le docker-compose doivent etre enumérés a la fin du ficher :
+
+  ```yaml
+  volumes:
+    data:
+    logs:
   ```
