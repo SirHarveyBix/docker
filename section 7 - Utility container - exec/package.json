@@ -1,0 +1,11 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Les _utilities contaiers_ sont des container qui contiennent un environement de dev, comme: node, python etc ..., sans avoir a l'installer en local, tout en pouvant interagir avec .",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

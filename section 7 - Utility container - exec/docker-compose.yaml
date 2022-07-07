@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  custom_npm:
+    build: ./
+    stdin_open: true
+    tty: true
+    container_name: mynpm
+    volumes:
+      - ./:/app
