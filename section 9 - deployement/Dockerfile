@@ -4,9 +4,9 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN npm install
+RUN yarn
 
-COPY . .
+COPY . /app
 
 EXPOSE 80
 
