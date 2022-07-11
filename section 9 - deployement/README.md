@@ -35,6 +35,7 @@ coté AWS, avant de renter dans la console AWS, il nous faut rendre l'accès pos
 et s'y connecter a l'aide de la commande indiquée :
 
 - ```ssh -i "exemple.pem" ec2-user@ec2-44-204-64-103.compute-1.amazonaws.com```
+  - _url fourni par AWS_
 
 un fois connecté :
 
