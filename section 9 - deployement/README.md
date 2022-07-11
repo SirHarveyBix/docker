@@ -1,5 +1,7 @@
 # docker
 
+>[> **_small-app_**](/small-app)
+
 **Bind Mounts, Volumes, & `COPY`**
 
 Ces élements sont utile durant le developpement, mais mal utilisés, certains dangereux a deployer.
@@ -24,6 +26,8 @@ Le moyen le plus simple de deployer une image est de la rendre acessible en lign
 
 ### AWS
 
+en cas de besoins : [Academind : AWS - the basics](https://academind.com/tutorials/aws-the-basics)
+
 coté AWS, avant de renter dans la console AWS, il nous faut rendre l'accès possible, ici, il faut generer un ficher `.pem`, et lancer:
 
 - ```chmod 400 exemple.pem```,
@@ -42,3 +46,5 @@ un fois connecté :
 il faut bien sur en amout admistirer la console, et autoriser l'accès dans _seucrity group_
 
 le site sera alors accessible a l'adresse IP indiquée, ici : [44.204.64.103](http://44.204.64.103/)
+
+cette partie cincerne le deploiement EC2 la partie suivante: ECS a été sautée (_Lecture 139. Deploying with AWS ECS: A Managed Docker Container Service_)

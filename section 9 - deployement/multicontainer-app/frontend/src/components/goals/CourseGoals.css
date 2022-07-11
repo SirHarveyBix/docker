@@ -1,0 +1,13 @@
+#course-goals {
+  text-align: center;
+}
+
+#course-goals h2 {
+  color: #414040;
+}
+
+#course-goals ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
