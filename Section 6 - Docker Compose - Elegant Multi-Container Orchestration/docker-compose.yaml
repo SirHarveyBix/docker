@@ -37,6 +37,7 @@ services:
     stdin_open: true
     tty: true
 
+# les volumes sont decalrés
 volumes:
   data:
   logs:
