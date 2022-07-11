@@ -36,3 +36,5 @@ suivi du cours : [Docker & Kubernetes: The Practical Guide [2022 Edition]](https
 
 - les Bind Mounts doivent etre remplacés par `COPY`, ou Volumes, il ne doivent etre laissée en production
 - Multi-stages
+
+**Kubernetes : [section 10 - Kubernetes](./section%2010%20-%20Kubernetes)**
