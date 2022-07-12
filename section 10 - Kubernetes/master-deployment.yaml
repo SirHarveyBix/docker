@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+
+spec: 
+  selector:
+    app: first-app-deployment
+  ports:
+    - protocol: 'TCP'
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: first-app-deployment
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: first-app
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: first-app
+        tier: backend
+
+    spec:
+      containers:
+        - name: first-app-node
+          image: sirharvey/minikube-app:3.0
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 10
+            initialDelaySeconds: 5
