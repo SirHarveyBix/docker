@@ -38,3 +38,5 @@ suivi du cours : [Docker & Kubernetes: The Practical Guide [2022 Edition]](https
 - Multi-stages
 
 **Kubernetes : [section 10 - Kubernetes](./section%2010%20-%20Kubernetes)**
+
+**volumes & persistance des données : [section 11 - data & volumes](./section%2011%20-%20data%20&%20volumes)**
