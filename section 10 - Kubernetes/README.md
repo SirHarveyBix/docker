@@ -118,3 +118,44 @@ _pour installer minikube  : [minikube start](https://minikube.sigs.k8s.io/docs/s
 pour mettre a jours le code, il faut bien sur rebuild avec docker : ```docker build -t sirharvey/minikube-app:2.0 .``` et push : ```docker push sirharvey/minikube-app:2.0``` le tag doit etre changé a chaque nouvelle mise a jours, ensuite :
 
 - ```kubectl set image deployment/first-app minikube-app=sirharvey/minikube-app:2.0```, puis ```kubectl rollout status deployment/first-app``` : affiche le status du deploiement
+
+> **avant d'aller plus loin :**
+```kubectl get deployments```, ```pods```, & ```services```.
+ ```kubectl delete deployment NAME```
+
+---
+
+a la mainère de docker tout est possible en comands, mais le docker-compose est plus pratique, voici comment creer des fichier de deploiement: 
+
+
+après avoir creer votre ficher de [deploiement](./deployment.yaml)
+
+- ```kubectl apply -f=deployment.yaml```
+  - ```kubectl get deployments``` :
+
+    ```shell
+      NAME                   READY   UP-TO-DATE   AVAILABLE   AGE
+      first-app-deployment   3/3     3            3           62s
+      ```
+
+après avoir creer votre ficher de [services](./service.yaml)
+
+- ```kubectl apply -f=service.yaml```
+  - ```kubectl get services``` :
+
+    ```shell
+    NAME         TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+    backend      LoadBalancer   10.110.71.82   <pending>     80:30510/TCP   52s
+    kubernetes   ClusterIP      10.96.0.1      <none>        443/TCP        19h
+      ```
+
+_```kubectl apply -f=deployment.yaml -f=service.yaml```_
+
+on peut maintenant lancer l'appli :
+
+- ```minikube service backend```
+
+pour supprimer un _service_ ou un _deployement_ issu d'un fichier:
+
+- ```kubectl delete -f=deployment.yaml```
+- ```kubectl delete -f=service.yaml```

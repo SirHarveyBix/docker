@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
   res.send(`
     <h1>Hello from this NodeJS app !</h1>
     <p>Do not try to send a request to /error</p>
-    <p> .. you will everything down.</p>
+    <p> .. you will crash everything down.</p>
   `);
 });
 

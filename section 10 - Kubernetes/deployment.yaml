@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment # kubectl create deployment
+metadata:
+  name: first-app-deployment
+
+# configuration du deploiement
+spec:  # kubectl scale deployment/first-app-deployment --replicas=3
+  replicas: 3
+  selector:
+    matchLabels:
+      app: first-app
+      tier: backend
+# matchExpressions ou matchLabels
+    # matchExpressions: 
+    #   - {key: app, operator: NotIn, values: [second-app, first-app]}
+  template:
+    metadata:
+      labels:
+        app: first-app
+        tier: backend # autant de labels qu'on veut
+
+# configuration du pod
+    spec:
+      containers:
+        - name: first-app-node
+          image: sirharvey/minikube-app:3.0 #--image=DOCKERIMAGE
+          imagePullPolicy: Always # always pull the latest image
+          # healthycheck evite les crashes
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+              # httpHeaders:
+            periodSeconds: 10
+            initialDelaySeconds: 5
+        # - name: new-image
+        #   image:
+        #   imagePullPolicy: Always
+        #   livenessProbe:
+        #     httpGet: 
+        #       path: /something
+        #       port: 3000
+        #       httpHeaders:
+        #     periodSeconds:
+        #     initialDelaySeconds:

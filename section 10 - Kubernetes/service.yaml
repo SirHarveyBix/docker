@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+
+spec: 
+  selector:
+    app: first-app
+    # tier n'est pas necessaire; le selector n'exposera tout les pods avec un labell app, et valur: second app
+  ports:
+    - protocol: 'TCP'
+      port: 80
+      targetPort: 8080
+  # type: ClusterIP defaut, IP intern
+  # type: NodePort : worker node
+  type: LoadBalancer # le plus adaptable
