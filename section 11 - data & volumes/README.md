@@ -111,3 +111,45 @@ retour dans [deployment.yaml](deployment.yaml), pour etablir la connection des v
           persistentVolumeClaim:
             claimName: host-pvc
 ```
+
+## .env Variables
+
+mise en place des variables d'environement :
+grace a Node: `process.env.`
+[app.js](app.js)
+
+```js
+const filePath = path.join(__dirname, process.env.STORY_FOLDER, 'text.txt');
+```
+
+c'ets cette varible qui est crée ici : `STORY_FOLDER`
+[deployment.yaml](deployment.yaml)
+
+```yaml
+          env:
+            - name: STORY_FOLDER # nom de la variable
+              value: 'story' # dossier creer dans app/story
+```
+
+dans le cas de la creation d'un [fichier d'environement](environment.yaml)
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: data-store-env
+
+data:
+  nomDuDossier: 'story'
+```
+
+ il faut editer le fichier [deployment.yaml](deployment.yaml) en consequence:
+
+```yaml
+           env:
+            - name: STORY_FOLDER # nom de la variable
+              valueFrom:
+                configMapKeyRef:
+                  name: data-store-env # nom de l'environement crééer dans environment.yaml
+                  key: nomDuDossier # nom de la clé dans le meme fichier
+```

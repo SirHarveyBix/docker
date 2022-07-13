@@ -16,8 +16,18 @@ spec:
     spec:
       containers:
         - name: story
-          image: sirharvey/kube-story:1
+          image: sirharvey/kube-story:3
           imagePullPolicy: Always
+          env:
+            - name: STORY_FOLDER
+              valueFrom:
+                configMapKeyRef:
+                  name: data-store-env
+                  key: folder
+          resources: # prevent lint error 
+            limits:
+              memory: 1Gi
+              cpu: '1'
           volumeMounts:
             - name: story-volume
               mountPath: /app/story # define in docker-compose.yaml
