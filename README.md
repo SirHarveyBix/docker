@@ -39,4 +39,6 @@ suivi du cours : [Docker & Kubernetes: The Practical Guide [2022 Edition]](https
 
 **Kubernetes : [section 10 - Kubernetes](./section%2010%20-%20Kubernetes)**
 
-**volumes, persistance & env : [section 11 - data & volumes](./section%2011%20-%20data%20&%20volumes)**
+**Volumes, persistance & env : [section 11 - data & volumes](./section%2011%20-%20data%20&%20volumes)**
+
+**Reseaux : [section 12 - Networking](./section%2012%20-%20Networking)**

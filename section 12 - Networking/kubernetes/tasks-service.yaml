@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-service
+
+spec:
+  selector:
+    app: tasks
+  type: LoadBalancer
+  ports:
+    - name: tasks-port
+      protocol: TCP
+      port: 8000
+      targetPort: 8000
