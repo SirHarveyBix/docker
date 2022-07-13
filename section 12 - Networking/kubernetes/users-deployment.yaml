@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-deployment
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+      - name: users
+        image: sirharvey/kube-users:latest
+        env:
+          - name: AUTH_ADDRESS
+            value: "auth-service.default"
+            # .default => namespace (kubectl get namespaces)
+            # il se connectera automatiquement a l'adrresse IP generée pour le namespace
+            # value: "10.111.109.91"
+
+# auth a son propre fichier de deploiement
+      # - name: auth
+      #   image: sirharvey/kube-auth:latest

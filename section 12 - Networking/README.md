@@ -33,6 +33,7 @@
   - GET : fail - pas exposé publiquement
 
 ---
+
 ## Lancement du projet
 
 preparer le terain:
@@ -45,7 +46,7 @@ preparer le terain:
 
 ---
 
-creer la premiere image:
+### creer l'image : **Users**
 
 - ```cd users-api```
   - ```docker build -t sirharvey/kube-users .```
@@ -60,3 +61,30 @@ et le service :
 
 - ```kubectl apply -f=users-service.yaml```
   - ```minikube service users-service```
+
+### creer l'image : **Auth**
+
+- ```cd auth-api```
+  - ```docker build -t sirharvey/kube-auth .```
+  - ```docker push sirharvey/kube-auth```
+
+## Variable d'environement
+
+[docker-compose.yaml](docker-compose.yaml)
+
+```yaml
+    environment:
+      AUTH_ADDRESS: auth
+      AUTH_SERVICE_SERVICE_HOST: auth
+```
+
+[users-app.js](users-api/users-app.js)
+
+```js
+  const hashedPW = await axios.get(`http://${process.env.AUTH_SERVICE_SERVICE_HOST}/hashed-password/` + password);
+```
+
+la variable `AUTH_SERVICE_SERVICE_HOST` est auto generée par kubernetes:
+
+- `AUTH_SERVICE` : indique le nom du service concerné ([auth-service.yaml](kubernetes/auth-service.yaml))
+- `SERVICE_HOST` : adresse auto generée
