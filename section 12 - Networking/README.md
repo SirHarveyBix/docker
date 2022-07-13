@@ -104,3 +104,23 @@ et le service :
 
 - ```kubectl apply -f=tasks-service.yaml```
   - ```minikube service tasks-service```
+
+
+### creer l'image : **Frontend**
+
+après avoir modifier les URL [App.js](frontend/src/App.js) :
+
+```js
+  const fetchTasks = useCallback(function () {
+    fetch('http://192.168.49.2:32059/tasks', {
+
+  function addTaskHandler(task) {
+    fetch('http://192.168.49.2:32059/tasks', {
+```
+
+cette URL est visible après avoir lancer : ```minikube service tasks-service```, depuis le dossier [`tasks-api`](tasks-api)
+
+- ```docker build -t sirharvey/kube-front .```
+- ```docker run -p 80:80 --rm -d sirharvey/kube-front```
+
+```docker push sirharvey/kube-front```

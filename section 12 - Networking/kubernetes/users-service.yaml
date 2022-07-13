@@ -6,10 +6,9 @@ metadata:
 spec:
   selector:
     app: users
-  type: LoadBalancer # ClusterIp par default | LoadBalancer : outside world connection
+  type: LoadBalancer
   ports:
-  - name: users-port
-    protocol: TCP
-    port: 8080
-    targetPort: 8080
-
+    - name: users-port
+      protocol: TCP
+      port: 8080
+      targetPort: 8080

@@ -14,11 +14,11 @@ spec:
         app: users
     spec:
       containers:
-      - name: users
-        image: sirharvey/kube-users:latest
-        env:
-          - name: AUTH_ADDRESS
-            value: "auth-service.default"
+        - name: users
+          image: sirharvey/kube-users:latest
+          env:
+            - name: AUTH_ADDRESS
+              value: "auth-service.default"
             # .default => namespace (kubectl get namespaces)
             # il se connectera automatiquement a l'adrresse IP generée pour le namespace
             # value: "10.111.109.91"

@@ -14,5 +14,5 @@ spec:
         app: auth
     spec:
       containers:
-      - name: auth
-        image: sirharvey/kube-auth:latest
+        - name: auth
+          image: sirharvey/kube-auth:latest

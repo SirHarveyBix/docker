@@ -14,11 +14,11 @@ spec:
         app: tasks
     spec:
       containers:
-      - name: tasks
-        image: sirharvey/kube-tasks:latest
-        env:
-          - name: AUTH_ADDRESS
-            value: "tasks-service.default"
-          - name: TASKS_FOLDER
-            value: tasks
-
+        - name: tasks
+          image: sirharvey/kube-tasks:latest
+          imagePullPolicy: Always
+          env:
+            - name: AUTH_ADDRESS
+              value: "auth-service.default"
+            - name: TASKS_FOLDER
+              value: tasks
