@@ -108,19 +108,40 @@ et le service :
 
 ### creer l'image : **Frontend**
 
-après avoir modifier les URL [App.js](frontend/src/App.js) :
+l'accès au tasks-service dans le front se faut comme ça :
+[nginx.conf](frontend/conf/nginx.conf) :
 
-```js
-  const fetchTasks = useCallback(function () {
-    fetch('http://192.168.49.2:32059/tasks', {
+```nginx
+  location /api/ {
+    proxy_pass http://tasks-service.default:8000/;
+  }
+```
 
-  function addTaskHandler(task) {
-    fetch('http://192.168.49.2:32059/tasks', {
+- ```tasks-service``` : le service lancé [tasks-service.yaml](kubernetes/tasks-service.yaml)
+- ```.default``` : transforme le servie en URL accessible
+- ```:8000``` : le port d'ecoute : [tasks-service.yaml](kubernetes/tasks-service.yaml) et [Dockerfile](tasks-api/Dockerfile)
+
+
+
+
+dans [App.js](frontend/src/App.js), il est recuperé de cette maniere :
+
+```jsx
+    fetch(`/api/tasks`, {
+      headers: {
+        'Authorization': 'Bearer abc'
+      }
+    })
 ```
 
 cette URL est visible après avoir lancer : ```minikube service tasks-service```, depuis le dossier [`tasks-api`](tasks-api)
 
 - ```docker build -t sirharvey/kube-front .```
-- ```docker run -p 80:80 --rm -d sirharvey/kube-front```
+  - ```docker run -p 80:80 --rm -d sirharvey/kube-front```
 
-```docker push sirharvey/kube-front```
+- ```docker push sirharvey/kube-front```
+
+on peu appliquer service et deploiement
+
+- ```kubectl apply -f=front-service.yaml -f=front-deployment.yaml```
+- ```minikube service front-service```
