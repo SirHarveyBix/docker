@@ -42,3 +42,7 @@ suivi du cours : [Docker & Kubernetes: The Practical Guide [2022 Edition]](https
 **Volumes, persistance & env : [section 11 - data & volumes](./section%2011%20-%20data%20&%20volumes)**
 
 **Reseaux : [section 12 - Networking](./section%2012%20-%20Networking)**
+
+---
+
+_**Les sections concerant le deploiement sur AWS : ECS & EKS sont payante, je n'ai pas completer ces modules**_
