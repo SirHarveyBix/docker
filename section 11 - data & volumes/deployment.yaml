@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: story-deployment
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: story
+  template:
+    metadata:
+      labels:
+        app: story
+
+    spec:
+      containers:
+        - name: story
+          image: sirharvey/kube-story:3
+          imagePullPolicy: Always
+          env:
+            - name: STORY_FOLDER
+              valueFrom:
+                configMapKeyRef:
+                  name: data-store-env
+                  key: folder
+          resources: # prevent lint error 
+            limits:
+              memory: 1Gi
+              cpu: '1'
+          volumeMounts:
+            - name: story-volume
+              mountPath: /app/story # define in docker-compose.yaml
+      volumes:
+        - name: story-volume
+          persistentVolumeClaim:
+            claimName: host-pvc
