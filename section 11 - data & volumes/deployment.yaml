@@ -4,7 +4,7 @@ metadata:
   name: story-deployment
 
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: story
@@ -12,8 +12,16 @@ spec:
     metadata:
       labels:
         app: story
+
     spec:
       containers:
         - name: story
-          image: sirharvey/kube-story
+          image: sirharvey/kube-story:1
           imagePullPolicy: Always
+          volumeMounts:
+            - name: story-volume
+              mountPath: /app/story # define in docker-compose.yaml
+      volumes:
+        - name: story-volume
+          persistentVolumeClaim:
+            claimName: host-pvc

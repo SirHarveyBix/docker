@@ -53,3 +53,61 @@ preparer le deploiement
   ```
 
 recuperez l'URL ici <http://127.0.0.1:57479>, et toujours via postman POST / GET [/story](/)
+
+## volumes
+
+[deployment.yaml](deployment.yaml) :
+
+```yaml
+    spec:
+      containers:
+        - name: story
+          image: sirharvey/kube-story
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: story-volume
+              mountPath: /app/story # define in docker-compose.yaml
+      volumes:
+        - name: story-volume
+          emptyDir: {} # keep data as long as the pod is alive
+```
+
+n'est relatif qu'au pod:
+
+```yaml
+          emptyDir: {} # creer un dossier vide dans les pods
+```
+
+les volumes sont liés a docker, particulierement dans ce cas
+
+```yaml
+          hostPath: 
+            path: /data # partager avec le container type Bind mount
+            type: DirectoryOrCreate # sera creer si il n'existe pas
+```
+
+Jusque la tous les volumes ne persistent que tant que les pods sont _alive_ .
+
+maintenant tout les pods ont accès aux volumes
+fichier de confoguration des volumes de pods : [host-pv.yaml](host-pv.yaml)
+
+```yaml
+spec:
+  capacity:
+    storage: 4Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data
+    type: DirectoryOrCreate
+```
+
+retour dans [deployment.yaml](deployment.yaml), pour etablir la connection des volumes entre les pods grace a _persistent volume claim_
+
+```yaml
+      volumes:
+        - name: story-volume
+          persistentVolumeClaim:
+            claimName: host-pvc
+```
