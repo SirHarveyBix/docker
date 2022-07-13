@@ -13,8 +13,8 @@ services:
 
   tasks:
     build: ./tasks-api
-    ports: 
-      - "8000:8000"
-
     environment:
       TASKS_FOLDER: tasks
+      AUTH_ADDRESS: auth
+    ports: 
+      - "8000:8000"

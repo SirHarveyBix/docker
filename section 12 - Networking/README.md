@@ -88,3 +88,19 @@ la variable `AUTH_SERVICE_SERVICE_HOST` est auto generée par kubernetes:
 
 - `AUTH_SERVICE` : indique le nom du service concerné ([auth-service.yaml](kubernetes/auth-service.yaml))
 - `SERVICE_HOST` : adresse auto generée
+
+### creer l'image : **Tasks**
+
+- ```cd tasks-api```
+  - ```docker build -t sirharvey/kube-tasks .```
+  - ```docker push sirharvey/kube-tasks```
+
+creer le deploiement :
+
+- ```cd ../kubernetes```
+  - ```kubectl apply -f=tasks-deployment.yaml```
+
+et le service :
+
+- ```kubectl apply -f=tasks-service.yaml```
+  - ```minikube service tasks-service```

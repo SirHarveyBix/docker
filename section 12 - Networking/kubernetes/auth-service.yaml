@@ -8,7 +8,7 @@ spec:
     app: auth
   type: ClusterIP # ne sera pas exposer en dehors du cluster
   ports:
-  - name: users-service-port
+  - name: users-port
     protocol: TCP
     port: 80
     targetPort: 80

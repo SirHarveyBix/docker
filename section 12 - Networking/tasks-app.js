@@ -11,6 +11,13 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  next();
+})
+
 const extractAndVerifyToken = async (headers) => {
   if (!headers.authorization) {
     throw new Error('No token provided.');
@@ -52,12 +59,12 @@ app.post('/tasks', async (req, res) => {
     fs.appendFile(filePath, jsonTask + 'TASK_SPLIT', (err) => {
       if (err) {
         console.log(err);
-        return res.status(500).json({ message: 'Storing the task failed.', err: err });
+        return res.status(500).json({ message: 'Storing the task failed.' });
       }
       res.status(201).json({ message: 'Task stored.', createdTask: task });
     });
   } catch (err) {
-    return res.status(401).json({ message: 'Could not verify token.', err: err });
+    return res.status(401).json({ message: 'Could not verify token.' });
   }
 });
 
